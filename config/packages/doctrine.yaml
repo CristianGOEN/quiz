@@ -1,6 +1,10 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
+        types:
+            quiz_id: App\Quiz\Quizzes\Infrastructure\Doctrine\QuizIdType
+            question_id: App\Quiz\Questions\Infrastructure\Doctrine\QuestionIdType
+            answer_id: App\Quiz\Answers\Infrastructure\Doctrine\AnswerIdType
 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
@@ -10,9 +14,33 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
+            #App:
+            #    is_bundle: false
+            #    type: annotation
+            #    dir: '%kernel.project_dir%/src/Entity'
+            #    prefix: 'App\Entity'
+            #    alias: App
+            App/User:
                 is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+                type: xml
+                dir: '%kernel.project_dir%/src/Quiz/Users/Infrastructure/Doctrine'
+                prefix: 'App\Quiz\Users\Domain'
+                alias: App/User
+            App/Quiz:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Quiz/Quizzes/Infrastructure/Doctrine'
+                prefix: 'App\Quiz\Quizzes\Domain'
+                alias: App/Quiz
+            App/Question:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Quiz/Questions/Infrastructure/Doctrine'
+                prefix: 'App\Quiz\Questions\Domain'
+                alias: App/Question
+            App/Answer:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Quiz/Answers/Infrastructure/Doctrine'
+                prefix: 'App\Quiz\Answers\Domain'
+                alias: App/Answer

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Quiz\Users\Domain\User" table="users">
+        <id name="id" type="string" column="id" length="36" />
+        <embedded name="name" class="App\Quiz\Users\Domain\UserName" use-column-prefix="false"/>
+        <embedded name="email" class="App\Quiz\Users\Domain\UserEmail" use-column-prefix="false"/>
+        <embedded name="password" class="App\Quiz\Users\Domain\UserPassword" use-column-prefix="false"/>
+    </entity>
+
+</doctrine-mapping>

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<form method="post" action="register">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <label for="inputName">Name</label>
+    <input type="text" name="name" id="inputName" class="form-control" autocomplete="name" required autofocus>
+    <label for="inputEmail">Email</label>
+    <input type="email" name="email" id="inputEmail" class="form-control" autocomplete="email" required>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    <input type="text" name="id" id="inputId" value="{{ uuid }}">
+
+    <button class="btn btn-lg btn-primary" type="submit">
+        Register
+    </button>
+</form>
+{% endblock %}

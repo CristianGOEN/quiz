@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Quiz\Answers\Domain\Answer" table="answers">
+        <id name="id" type="answer_id" column="id" length="36" />
+        <!--<field name="questionId" type="question_id" column="question_id" length="36" />-->
+        <embedded name="text" class="App\Quiz\Answers\Domain\AnswerText" use-column-prefix="false"/>
+        <field name="correct" type="boolean" column="correct" />
+        <many-to-one field="question" target-entity="App\Quiz\Questions\Domain\Question" inversed-by="answers" fetch="LAZY">
+            <join-columns>
+                <join-column name="question_id" referenced-column-name="id" nullable=""/>
+            </join-columns>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

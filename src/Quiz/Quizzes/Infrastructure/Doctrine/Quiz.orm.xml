@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Quiz\Quizzes\Domain\Quiz" table="quizzes">
+        <id name="id" type="quiz_id" column="id" length="36" />
+        <embedded name="title" class="App\Quiz\Quizzes\Domain\QuizTitle" use-column-prefix="false"/>
+        <one-to-many field="questions" target-entity="App\Quiz\Questions\Domain\Question" mapped-by="quiz" fetch="LAZY"/>
+    </entity>
+
+</doctrine-mapping>

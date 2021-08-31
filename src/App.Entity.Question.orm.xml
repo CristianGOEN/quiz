@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="App\Repository\QuestionRepository" name="App\Entity\Question" table="question">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="text" type="string" column="text" length="255" nullable="false"/>
+    <one-to-many field="answers" target-entity="App\Entity\Answer" mapped-by="question" fetch="LAZY"/>
+    <many-to-one field="quiz" target-entity="App\Entity\Quiz" inversed-by="questions" fetch="LAZY">
+      <join-columns>
+        <join-column name="quiz_id" referenced-column-name="id" nullable=""/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

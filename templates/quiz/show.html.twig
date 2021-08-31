@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List all quizzes{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="row">
+                <h1>{{ quiz.title }}</h1>
+            </div>
+            <div class="row g-3">
+                {% for question in quiz.questions %}
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">{{ question.text }}</h3>
+                                {% for answer in question.answers %}
+                                    <p>{{ answer.text }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
