@@ -23,12 +23,12 @@ final class QuestionCreator
         $quizId = new QuizId($request->quizId());
         $text = new QuestionText($request->text());
 
-        $this->quizRepository->search($quizId);
+        $quiz = $this->quizRepository->search($quizId);
 
         $question = Question::create(
             $id,
-            $quizId,
-            $text
+            $text,
+            $quiz
         );
 
         $this->repository->save($question);

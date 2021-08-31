@@ -4,36 +4,29 @@ declare(strict_types=1);
 
 namespace App\Quiz\Questions\Domain;
 
-use App\Entity\Answer;
+use App\Quiz\Answers\Domain\Answer;
 use App\Quiz\Quizzes\Domain\Quiz;
 use App\Quiz\Shared\Domain\Questions\QuestionId;
-use App\Quiz\Shared\Domain\Quizzes\QuizId;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 final class Question
 {
     private $answers;
-    private $quiz;
 
-    public function __construct(private QuestionId $id, private QuizId $quizId, private QuestionText $text)
+    public function __construct(private QuestionId $id, private QuestionText $text, private Quiz $quiz)
     {
         $this->answers = new ArrayCollection();
     }
 
-    public static function create(QuestionId $id, QuizId $quizId, QuestionText $text): self
+    public static function create(QuestionId $id, QuestionText $text, Quiz $quiz): self
     {
-        return new self($id, $quizId, $text);
+        return new self($id, $text, $quiz);
     }
 
     public function id(): QuestionId
     {
         return $this->id;
-    }
-
-    public function quizId(): ?QuizId
-    {
-        return $this->quizId;
     }
 
     public function text(): QuestionText
@@ -49,15 +42,8 @@ final class Question
         return $this->answers;
     }
 
-    public function getQuiz(): ?Quiz
+    public function quiz(): Quiz
     {
         return $this->quiz;
-    }
-
-    public function setQuiz(?Quiz $quiz): self
-    {
-        $this->quiz = $quiz;
-
-        return $this;
     }
 }

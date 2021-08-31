@@ -24,13 +24,13 @@ final class AnswerCreator
         $text = new AnswerText($request->text());
         $correct = (bool)$request->correct();
 
-        $this->questionRepository->search($questionId);
+        $question = $this->questionRepository->search($questionId);
 
         $answer = Answer::create(
             $id,
-            $questionId,
             $text,
-            $correct
+            $correct,
+            $question
         );
 
         $this->repository->save($answer);

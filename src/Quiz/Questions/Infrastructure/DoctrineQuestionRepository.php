@@ -9,20 +9,10 @@ use App\Quiz\Questions\Domain\QuestionRepository;
 use App\Quiz\Questions\Domain\Questions;
 use App\Quiz\Shared\Domain\Questions\QuestionId;
 use App\Quiz\Shared\Domain\Quizzes\QuizId;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 
-final class DoctrineQuestionRepository implements QuestionRepository
+final class DoctrineQuestionRepository extends DoctrineRepository implements QuestionRepository
 {
-    public function __construct(private EntityManagerInterface $entityManager)
-    {
-    }
-
-    public function entityManager(): EntityManagerInterface
-    {
-        return $this->entityManager;
-    }
-
-
     public function save(Question $question): void
     {
         $this->entityManager()->persist($question);
@@ -31,7 +21,7 @@ final class DoctrineQuestionRepository implements QuestionRepository
 
     public function search(QuestionId $id): ?Question
     {
-        return $this->entityManager->getRepository(Question::class)->find($id);
+        return $this->repository(Question::class)->find($id);
     }
 
     public function update(Question $question): void
@@ -46,7 +36,7 @@ final class DoctrineQuestionRepository implements QuestionRepository
 
     public function searchByQuizId(QuizId $id): ?Questions
     {
-        $query = $this->entityManager->getRepository(Question::class)->findBy(array('quizId' => $id));
+        $query = $this->repository(Question::class)->findBy(array('quizId' => $id));
         return new Questions($query);
     }
 }

@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Quiz\Answers\Infrastructure\Doctrine;
 
-use App\Quiz\Shared\Domain\Questions\QuestionId;
+use App\Quiz\Answers\Domain\AnswerId;
 use App\Shared\Domain\ValueObject\Uuid;
 use Doctrine\DBAL\Types\StringType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
-final class AnswerIdType  extends StringType
+final class AnswerIdType extends StringType
 {
-    const MYTYPE = 'answerId';
+    const MYTYPE = 'answer_id';
 
     protected function typeClassName(): string
     {
-        return QuestionId::class;
+        return AnswerId::class;
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform)
@@ -31,7 +31,7 @@ final class AnswerIdType  extends StringType
         return $value->value();
     }
 
-    public function getName()
+    public function getName(): string
     {
         return self::MYTYPE;
     }

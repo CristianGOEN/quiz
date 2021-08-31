@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Quiz\Quizzes\Domain;
 
 use App\Quiz\Questions\Domain\Question;
-use App\Quiz\Questions\Domain\Questions;
 use App\Quiz\Shared\Domain\Quizzes\QuizId;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

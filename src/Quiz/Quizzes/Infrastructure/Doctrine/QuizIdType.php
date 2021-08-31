@@ -9,7 +9,7 @@ use App\Shared\Domain\ValueObject\Uuid;
 use Doctrine\DBAL\Types\StringType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
-final class QuizIdType  extends StringType
+final class QuizIdType extends StringType
 {
     const MYTYPE = 'quiz_id';
 

@@ -40,7 +40,6 @@ class QuizWebPostCreateController extends AbstractController
                 )
             );
 
-            /*
             foreach ($question['answers'] as $answer) {
                 $this->answerCreator->__invoke(
                     new CreateAnswerRequest(
@@ -51,7 +50,6 @@ class QuizWebPostCreateController extends AbstractController
                     )
                 );
             }
-            */
         }
 
         return new Response('', Response::HTTP_CREATED);

@@ -9,9 +9,9 @@ use App\Shared\Domain\ValueObject\Uuid;
 use Doctrine\DBAL\Types\StringType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
-final class QuestionIdType  extends StringType
+final class QuestionIdType extends StringType
 {
-    const MYTYPE = 'questionId';
+    const MYTYPE = 'question_id';
 
     protected function typeClassName(): string
     {
@@ -31,7 +31,7 @@ final class QuestionIdType  extends StringType
         return $value->value();
     }
 
-    public function getName()
+    public function getName(): string
     {
         return self::MYTYPE;
     }

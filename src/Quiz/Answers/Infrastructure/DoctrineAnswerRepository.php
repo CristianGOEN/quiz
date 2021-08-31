@@ -7,19 +7,10 @@ namespace App\Quiz\Answers\Infrastructure;
 use App\Quiz\Answers\Domain\Answer;
 use App\Quiz\Answers\Domain\AnswerId;
 use App\Quiz\Answers\Domain\AnswerRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 
-final class DoctrineAnswerRepository implements AnswerRepository
+final class DoctrineAnswerRepository extends DoctrineRepository implements AnswerRepository
 {
-    public function __construct(private EntityManagerInterface $entityManager)
-    {
-    }
-
-    public function entityManager(): EntityManagerInterface
-    {
-        return $this->entityManager;
-    }
-
     public function save(Answer $answer): void
     {
         $this->entityManager()->persist($answer);

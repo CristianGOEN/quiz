@@ -5,19 +5,16 @@ declare(strict_types=1);
 namespace App\Quiz\Answers\Domain;
 
 use App\Quiz\Questions\Domain\Question;
-use App\Quiz\Shared\Domain\Questions\QuestionId;
 
 final class Answer
 {
-    private $question;
-
-    public function __construct(private AnswerId $id, private QuestionId $questionId, private AnswerText $text, private bool $correct)
+    public function __construct(private AnswerId $id, private AnswerText $text, private bool $correct, private Question $question)
     {
     }
 
-    public static function create(AnswerId $id, QuestionId $questionId, AnswerText $text, bool $correct): self
+    public static function create(AnswerId $id, AnswerText $text, bool $correct, Question $question): self
     {
-        return new self($id, $questionId, $text, $correct);
+        return new self($id, $text, $correct, $question);
     }
 
     public function id(): AnswerId
@@ -25,9 +22,9 @@ final class Answer
         return $this->id;
     }
 
-    public function questionId(): QuestionId
+    public function question(): Question
     {
-        return $this->questionId;
+        return $this->question;
     }
 
     public function text(): AnswerText
@@ -38,17 +35,5 @@ final class Answer
     public function correct(): bool
     {
         return $this->correct;
-    }
-
-    public function getQuestion(): ?Question
-    {
-        return $this->question;
-    }
-
-    public function setQuestion(?Question $question): self
-    {
-        $this->question = $question;
-
-        return $this;
     }
 }

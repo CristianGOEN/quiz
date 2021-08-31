@@ -6,21 +6,46 @@
     <div class="row">
         <div class="col-6 offset-3">
             <div class="row">
-                <h1>{{ quiz.title }}</h1>
-            </div>
-            <div class="row g-3">
-                {% for question in quiz.questions %}
-                    <div class="col-12">
-                        <div class="card">
+                <div class="col-12">
+                    <div class="card text-center">
+                        <form action="{{ path('quiz_web_post_result', { 'id' : quiz.id }) }}" method="post">
+                            <div class="card-header">
+                                <div class="row gap-1">
+                                    <div class="col-12">
+                                        <h3>{{ quiz.title }}</h3>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        25% complete
+                                        <!--questionIndex/quiz.questions.length)*100-->
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card-body">
-                                <h3 class="card-title">{{ question.text }}</h3>
-                                {% for answer in question.answers %}
-                                    <p>{{ answer.text }}</p>
+                                {% for question in quiz.questions %}
+                                    <h4 class="card-title">{{ question.text }}</h4>
+                                    <div class="d-grid gap-2 my-4">
+                                        {% for answer in question.answers %}
+                                            <input type="checkbox" class="btn-check" name="answerText-{{ question.id }}-{{ loop.index }}" id="answerText-{{ question.id }}-{{ loop.index }}" autocomplete="off">
+                                            <label class="btn btn-outline-primary text-start" for="answerText-{{ question.id }}-{{ loop.index }}">{{ loop.index }} - {{ answer.text }}</label>
+                                        {% endfor %}
+                                    </div>
                                 {% endfor %}
                             </div>
-                        </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-12 text-end">
+                                        <button class="btn btn-primary" type="submit">Send</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                {% endfor %}
+                </div>
             </div>
         </div>
     </div>

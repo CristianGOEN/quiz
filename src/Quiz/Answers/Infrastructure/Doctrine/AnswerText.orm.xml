@@ -6,5 +6,4 @@
     <embeddable name="App\Quiz\Answers\Domain\AnswerText">
         <field name="value" type="string" column="text"/>
     </embeddable>
-
 </doctrine-mapping>

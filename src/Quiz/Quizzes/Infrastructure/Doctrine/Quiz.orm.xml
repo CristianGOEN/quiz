@@ -7,5 +7,4 @@
         <embedded name="title" class="App\Quiz\Quizzes\Domain\QuizTitle" use-column-prefix="false"/>
         <one-to-many field="questions" target-entity="App\Quiz\Questions\Domain\Question" mapped-by="quiz" fetch="LAZY"/>
     </entity>
-
 </doctrine-mapping>
